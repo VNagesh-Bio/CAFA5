@@ -1,11 +1,11 @@
 ### Project Title
 
-Vaishnavi Nagesh
+Functional Prediction of Proteins - CAFA5 Challenge
 
 #### Executive summary
 This capstone project investigates Machine Learning techniques to enhance the accuracy of functional prrediction of proteins. Proteins are responsible for many activities in our tissues, organs, and bodies and they also play a central role in the structure and function of cells. Proteins are large molecules composed of 20 types of building-blocks known as amino acids. This amino-acid sequence determines the 3D structure and conformational dynamics of the protein, and that, in turn, determines its biological function. Due to ongoing genome sequencing projects, we are inundated with large amounts of genomic sequence data from thousands of species, which informs us of the amino-acid sequence data of proteins for which these genes code. The accurate assignment of biological function to the protein is key to understanding life at the molecular level. The Gene Ontology (GO) is a concept hierarchy that describes the biological function of genes and gene products at different levels of abstraction (Ashburner et al., 2000). It is a good model to describe the multi-faceted nature of protein function.
 
-I have used Neural networks, multi output logistic regression to assess the function of the proteins.
+I have used Neural networks(base line as provided in CAFA challenge), multi output logistic regression to assess the function of the proteins.
 
 
 #### Rationale
@@ -25,22 +25,75 @@ https://www.kaggle.com/competitions/cafa-5-protein-function-prediction/data
 
 Exploratory Data Analysis:
 
-1. To understand the distribution labels.
+1. Reporting the distribution of labels.
 2. To understand which GO terms are most frequently occuring.
-3. To subsample the GO terms to assign such that models do not run too long.
+3. Obtaining protein embeddings to meaningfully use the sequence data in classification. Biopython library was used in loading sequences and protein embeddings created by Sergei Fironov using the Rost Lab's T5 protein language model was utilized.
+4. To subsample the GO terms to assign such that models do not run too long - Subssampling of labels was done per 'aspect' term such that the distribution of the aspect was maintained in the terms to the best possible extent/
 
-Neural Networks:
-1. Using Dense Neural Network.
-2. Using Adam Optimizer
+Classification Methods Used:
 
-MultiOutput Logistic Regression:
-1. GridCV was used for hyper parameter tuning
+1. Neural Networks
+2. MultiOutput Logistic Regression
+3. MultiOutput Ridge Classifier
+4. MultiOutput Random Forest Classifier
+
 
 
 
 #### Results
 
-NN gives me 98% accuracy. Jury is still out for Logistic Regression since it is still running
+##### Exploratory Anayses
+Number of Unique Protein IDs: 142246
+Number of GO terms shared by the proteins: 31466
+Number of Aspects or Functional Classes being Represented: 3
+Each protein is represented by many GO terms, in turn having multiple aspects to its functionality
+
+![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/0b780c89-e5ac-4d4d-ad99-e7daf251dcbc)
+
+Among the GO Terms, the following aspects of the proteins are distributed as shown in the pie-chart
+
+![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/19ddea38-35ef-4217-8c13-2e48484312f7)
+
+Based on the ratio of the aspects, the most frequent GO terms in each category were chosen such that we down sample the labels to be predicted while maintaining the distribution of the aspect to the closest possible extent.
+
+![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/b06afc19-1495-474f-82a3-7da7d25a0984)
+
+In the Kaggle Challenge, the baseline model was that of Neural Networks which acheived 98% accuracy.
+
+![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/c45e80ac-9959-4f87-bc49-9f0e777e0214)    ![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/360a7f64-1d6c-4579-a005-cfdf25a3ee2d)
+
+
+
+
+
+
+##### Confusion Matrics of Three Classifiers - On first 15 lables
+
+Logistic Regression Classifier:
+![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/3e51be82-48a6-45a8-8cc0-8319fd97f1a8)
+
+
+Ridge Classifier:
+![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/eb6a3c2e-d295-46a2-8abe-ee07f7a04774)
+
+
+Random Forest Classifier:
+![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/16e53891-59c9-4e47-82b9-848ac08cffdf)
+
+
+GO:0001850 always seems to have high false negative rate. At some point it will become necessary to diagnose why a certain label always gets misclassified more number of times than others.
+
+##### Precision Recall and F1 Scores Among the Classifiers:
+
+| Classifier                                          | Accuracy   | Precision | Recall | F1 Score |
+| --------------------------------------------------- | ---------- | --------- | ------ | -------- |
+| Neural Nets                                         | 98         |           |        |          |
+| Logistics Regression                                | 83.22      | 0.64      | 0.44   | 0.47     |
+| Ridge Regression Classifier                         | 81.28      | 0.53      | 0.37   | 0.40     |
+| Random Forest Classifier                            | 81.33      | 0.57      | 0.27   | 0.26     |
+
+
+Overall Neural Nets definitelly appears to model and predict the data better than machine learning models. However, it must be noted that, it took a lot longer to train machine learning models. This was a bottle neck in grid searching and tuning the hyper paramters. Among the three classifiers, if I were to have resource and re-train an ML model, I would choose Logistic Regression.
 
 #### Next steps
 
