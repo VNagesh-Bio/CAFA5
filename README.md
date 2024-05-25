@@ -28,7 +28,7 @@ Exploratory Data Analysis:
 1. Reporting the distribution of labels.
 2. To understand which GO terms are most frequently occuring.
 3. Obtaining protein embeddings to meaningfully use the sequence data in classification. Biopython library was used in loading sequences and protein embeddings created by Sergei Fironov using the Rost Lab's T5 protein language model was utilized.
-4. To subsample the GO terms to assign such that models do not run too long - Subssampling of labels was done per 'aspect' term such that the distribution of the aspect was maintained in the terms to the best possible extent/
+4. To subsample the GO terms to assign such that models do not run too long - Subssampling of labels was done per 'aspect' term such that the distribution of the aspect was maintained in the terms to the best possible extent
 
 Classification Methods Used:
 
@@ -37,7 +37,7 @@ Classification Methods Used:
 3. MultiOutput Ridge Classifier
 4. MultiOutput Random Forest Classifier
 
-
+Grid search and hyperparameter tuning was done on the first 1000 - 2000 samples. The best model identified was then trained on the complete training set. This was done after I observed that grid searching on such a large dataset was taking more than a day on laptop.
 
 
 #### Results
@@ -89,8 +89,8 @@ GO:0001850 always seems to have high false negative rate. At some point it will 
 | --------------------------------------------------- | ---------- | --------- | ------ | -------- |
 | Neural Nets                                         | 98         |           |        |          |
 | Logistics Regression                                | 83.22      | 0.64      | 0.44   | 0.47     |
-| Ridge Regression Classifier                         | 81.28      | 0.53      | 0.37   | 0.40     |
-| Random Forest Classifier                            | 81.33      | 0.57      | 0.27   | 0.26     |
+| Ridge Regression Classifier                         | 83.14      | 0.66      | 0.42   | 0.44     |
+| Random Forest Classifier                            | 81.28      | 0.52      | 0.26   | 0.24     |
 
 
 Overall Neural Nets definitelly appears to model and predict the data better than machine learning models. However, it must be noted that, it took a lot longer to train machine learning models. This was a bottle neck in grid searching and tuning the hyper paramters. Among the three classifiers, if I were to have resource and re-train an ML model, I would choose Logistic Regression.
