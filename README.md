@@ -70,15 +70,18 @@ In the Kaggle Challenge, the baseline model was that of Neural Networks which ac
 ##### Confusion Matrics of Three Classifiers - On first 15 lables
 
 Logistic Regression Classifier:
-![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/3e51be82-48a6-45a8-8cc0-8319fd97f1a8)
+![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/f9ff0fac-2ac0-4837-ba61-025b8c4ecacc)
+
 
 
 Ridge Classifier:
-![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/eb6a3c2e-d295-46a2-8abe-ee07f7a04774)
+![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/abfa8487-dbf6-48d1-b001-cb9c368c5480)
+
 
 
 Random Forest Classifier:
-![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/16e53891-59c9-4e47-82b9-848ac08cffdf)
+![image](https://github.com/VNagesh-Bio/CAFA5/assets/3857429/c0dacaaa-7423-4c85-9b0a-9299e3a719d6)
+
 
 
 GO:0001850 always seems to have high false negative rate. At some point it will become necessary to diagnose why a certain label always gets misclassified more number of times than others.
